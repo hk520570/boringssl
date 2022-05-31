@@ -64,7 +64,7 @@ void CRYPTO_sms4_cbc128_encrypt(const uint8_t *in, uint8_t *out, size_t len,
 
   while (len >= 16) {
     for (n = 0; n < 16; n += sizeof(size_t)) {
-      store_word_le(out + n, load_word_le(in + n) ^ load_word_le(iv + n));
+      CRYPTO_store_word_le(out + n, CRYPTO_load_word_le(in + n) ^ CRYPTO_load_word_le(iv + n));
     }
     (*block)(out, out, key);
     iv = out;
@@ -119,7 +119,7 @@ void CRYPTO_sms4_cbc128_decrypt(const uint8_t *in, uint8_t *out, size_t len,
     while (len >= 16) {
       (*block)(in, out, key);
       for (n = 0; n < 16; n += sizeof(size_t)) {
-        store_word_le(out + n, load_word_le(out + n) ^ load_word_le(iv + n));
+        CRYPTO_store_word_le(out + n, CRYPTO_load_word_le(out + n) ^ CRYPTO_load_word_le(iv + n));
       }
       iv = in;
       len -= 16;
@@ -134,10 +134,10 @@ void CRYPTO_sms4_cbc128_decrypt(const uint8_t *in, uint8_t *out, size_t len,
     while (len >= 16) {
       (*block)(in, tmp.c, key);
       for (n = 0; n < 16; n += sizeof(size_t)) {
-        size_t c = load_word_le(in + n);
-        store_word_le(out + n,
-                      tmp.t[n / sizeof(size_t)] ^ load_word_le(ivec + n));
-        store_word_le(ivec + n, c);
+        size_t c = CRYPTO_load_word_le(in + n);
+        CRYPTO_store_word_le(out + n,
+                      tmp.t[n / sizeof(size_t)] ^ CRYPTO_load_word_le(ivec + n));
+        CRYPTO_store_word_le(ivec + n, c);
       }
       len -= 16;
       in += 16;
