@@ -67,6 +67,9 @@
 #include <openssl/nid.h>
 #include <openssl/rand.h>
 #include <openssl/sha.h>
+#ifndef OPENSSL_NO_SMS4
+#include <openssl/sms4.h>
+#endif
 #include <openssl/span.h>
 
 #include "../test/file_test.h"
@@ -118,6 +121,10 @@ static const EVP_CIPHER *GetCipher(const std::string &name) {
     return EVP_aes_256_gcm();
   } else if (name == "AES-256-OFB") {
     return EVP_aes_256_ofb();
+#ifndef OPENSSL_NO_SMS4
+  } else if (name == "SMS4-CBC") {
+    return EVP_sms4_cbc();
+#endif
   }
   return nullptr;
 }
@@ -237,6 +244,60 @@ static void TestOperation(FileTest *t, const EVP_CIPHER *cipher, bool encrypt,
                   nid == NID_aes_256_cbc;
     bool is_ofb = nid == NID_aes_128_ofb128 || nid == NID_aes_192_ofb128 ||
                   nid == NID_aes_256_ofb128;
+
+#ifndef OPENSSL_NO_SMS4
+    is_ctr = is_ctr || nid == NID_sms4_ctr;
+    is_cbc = is_cbc || nid == NID_sms4_cbc;
+    is_ofb = is_ofb || nid == NID_sms4_ofb128;
+    bool is_sms4 = nid == NID_sms4_ctr || nid == NID_sms4_cbc || nid == NID_sms4_ofb128;
+    if (is_sms4) {
+      if (is_ctr || is_cbc || is_ofb) {
+        SMS4_KEY sms4_key;
+        if (encrypt || !is_cbc) {
+          sms4_set_encrypt_key(&sms4_key, key.data());
+        } else {
+          sms4_set_decrypt_key(&sms4_key, key.data());
+        }
+
+        // The low-level APIs all work in-place.
+        bssl::Span<const uint8_t> input = *in;
+        result.clear();
+        if (in_place) {
+          result = *in;
+          input = result;
+        } else {
+          result.resize(out->size());
+        }
+        bssl::Span<uint8_t> output = bssl::MakeSpan(result);
+        ASSERT_EQ(input.size(), output.size());
+
+        // The low-level APIs all use block-size IVs.
+        ASSERT_EQ(iv.size(), size_t{SMS4_BLOCK_SIZE});
+        uint8_t ivec[SMS4_BLOCK_SIZE];
+        OPENSSL_memcpy(ivec, iv.data(), iv.size());
+
+        if (is_cbc && chunk_size % SMS4_BLOCK_SIZE == 0) {
+          // Note |SMS4_cbc_encrypt| requires block-aligned chunks.
+          if (chunk_size == 0) {
+            sms4_cbc_encrypt(input.data(), output.data(), input.size(), &sms4_key, ivec,
+                            encrypt);
+          } else {
+            do {
+              size_t todo = std::min(input.size(), chunk_size);
+              sms4_cbc_encrypt(input.data(), output.data(), todo, &sms4_key, ivec,
+                              encrypt);
+              input = input.subspan(todo);
+              output = output.subspan(todo);
+            } while (!input.empty());
+          }
+          EXPECT_EQ(Bytes(*out), Bytes(result));
+        }
+      }
+
+      return;
+    }
+#endif
+
     if (is_ctr || is_cbc || is_ofb) {
       AES_KEY aes;
       if (encrypt || !is_cbc) {

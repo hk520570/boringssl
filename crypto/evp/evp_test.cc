@@ -100,7 +100,12 @@ static const EVP_MD *GetDigest(FileTest *t, const std::string &name) {
     return EVP_sha384();
   } else if (name == "SHA512") {
     return EVP_sha512();
+#ifndef OPENSSL_NO_SM3
+  } else if (name == "SM3") {
+    return EVP_sm3();
+#endif
   }
+  
   ADD_FAILURE() << "Unknown digest: " << name;
   return nullptr;
 }

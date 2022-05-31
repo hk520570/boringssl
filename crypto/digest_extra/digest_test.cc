@@ -155,7 +155,7 @@ static const DigestTestVector kTestVectors[] = {
      
 #ifndef OPENSSL_NO_SM3
     {sm3, "abc", 1,
-     "66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0"}
+     "66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0"},
 #endif
     // BLAKE2b-256 tests.
     {blake2b256, "abc", 1,

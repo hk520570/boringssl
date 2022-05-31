@@ -94,6 +94,9 @@ static const struct {
     {NID_des_ede3_cbc, "des-ede3-cbc", EVP_des_ede3_cbc},
     {NID_rc2_cbc, "rc2-cbc", EVP_rc2_cbc},
     {NID_rc4, "rc4", EVP_rc4},
+#ifndef OPENSSL_NO_SMS4
+    {NID_sms4_cbc, "sms4-cbc", EVP_sms4_cbc},
+#endif
 };
 
 const EVP_CIPHER *EVP_get_cipherbynid(int nid) {

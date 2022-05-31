@@ -60,6 +60,11 @@
 #include "cipher/e_aes.c"
 #include "cipher/e_des.c"
 #include "des/des.c"
+#ifndef OPENSSL_NO_SMS4
+#include "cipher/e_sms4.c"
+#endif
+#include "cipher/e_aesccm.c"
+#include "cmac/cmac.c"
 #include "dh/check.c"
 #include "dh/dh.c"
 #include "digest/digest.c"

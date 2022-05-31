@@ -63,6 +63,25 @@
 extern "C" {
 #endif
 
+#ifndef OPENSSL_NO_SMS4
+
+#include <openssl/sms4.h>
+
+typedef void (*sms4_block128_f)(const uint8_t in[16], uint8_t out[16],
+                                const SMS4_KEY *key);
+
+typedef void (*sms4_cbc128_f)(const uint8_t *in, uint8_t *out, size_t len,
+                              const SMS4_KEY *key, uint8_t ivec[16], int enc);
+
+void CRYPTO_sms4_cbc128_encrypt(const uint8_t *in, uint8_t *out, size_t len,
+                                const SMS4_KEY *key, uint8_t ivec[16],
+                                sms4_block128_f block);
+
+void CRYPTO_sms4_cbc128_decrypt(const uint8_t *in, uint8_t *out, size_t len,
+                                const SMS4_KEY *key, uint8_t ivec[16],
+                                sms4_block128_f block);
+
+#endif  /* OPENSSL_NO_SMS4 */
 
 // block128_f is the type of an AES block cipher implementation.
 //
