@@ -63,6 +63,9 @@
 #include <openssl/md5.h>
 #include <openssl/nid.h>
 #include <openssl/sha.h>
+#ifndef OPENSSL_NO_SM3
+#include <openssl/sm3.h>
+#endif
 
 #include "internal.h"
 #include "../delocate.h"
@@ -265,6 +268,35 @@ DEFINE_METHOD_FUNCTION(EVP_MD, EVP_sha512_256) {
   out->block_size = 128;
   out->ctx_size = sizeof(SHA512_CTX);
 }
+
+
+#ifndef OPENSSL_NO_SM3
+static void sm3_init(EVP_MD_CTX *ctx)
+{
+	SM3_init(ctx->md_data);
+}
+
+static void sm3_update(EVP_MD_CTX *ctx, const void *in, size_t inlen)
+{
+	SM3_update(ctx->md_data, in, inlen);
+}
+
+static void sm3_final(EVP_MD_CTX *ctx, unsigned char *md)
+{
+	SM3_final(ctx->md_data, md);
+}
+
+DEFINE_METHOD_FUNCTION(EVP_MD, EVP_sm3) {
+  out->type = NID_sm3;
+  out->md_size = SM3_DIGEST_LENGTH;
+  out->flags = 0;
+  out->init = sm3_init;
+  out->update = sm3_update;
+  out->final = sm3_final;
+  out->block_size = SM3_BLOCK_SIZE;
+  out->ctx_size = sizeof(SM3_CTX);
+}
+#endif
 
 
 typedef struct {

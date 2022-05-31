@@ -4251,6 +4251,11 @@ extern "C" {
 #define NID_sha512_256 962
 #define OBJ_sha512_256 2L, 16L, 840L, 1L, 101L, 3L, 4L, 2L, 6L
 
+/* 国密 */
+#define SN_sm3          "SM3"
+#define LN_sm3          "sm3"
+#define NID_sm3         1148
+#define OBJ_sm3         OBJ_sm_scheme,401L
 
 #if defined(__cplusplus)
 } /* extern C */
