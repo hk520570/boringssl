@@ -342,6 +342,12 @@ add_library(
   rsa_extra/rsa_print.c
   stack/stack.c
   siphash/siphash.c
+  sm/sm3/sm3_hmac.c
+  sm/sm3/sm3.c
+  sm/sms4/sms4_cbc.c
+  sm/sms4/sms4_common.c
+  sm/sms4/sms4_enc.c
+  sm/sms4/sms4_setkey.c
   thread.c
   thread_none.c
   thread_pthread.c
@@ -547,6 +553,7 @@ add_executable(
   self_test.cc
   stack/stack_test.cc
   siphash/siphash_test.cc
+  sm/sm3/sm3_test.cc
   test/file_test_gtest.cc
   thread_test.cc
   trust_token/trust_token_test.cc
