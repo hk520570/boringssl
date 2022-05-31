@@ -4251,11 +4251,527 @@ extern "C" {
 #define NID_sha512_256 962
 #define OBJ_sha512_256 2L, 16L, 840L, 1L, 101L, 3L, 4L, 2L, 6L
 
-/* 国密 */
-#define SN_sm3          "SM3"
-#define LN_sm3          "sm3"
-#define NID_sm3         1148
-#define OBJ_sm3         OBJ_sm_scheme,401L
+#define SN_X9_62_id_ecSigType "id-ecSigType"
+#define NID_X9_62_id_ecSigType 963
+#define OBJ_X9_62_id_ecSigType 1L, 2L, 840L, 10045L, 4L
+
+#define SN_pbe_WithSM3AndSMS4_CBC "PBE-SM3-SMS4"
+#define LN_pbe_WithSM3AndSMS4_CBC "pbeWithSM3AndSMS4-CBC"
+#define NID_pbe_WithSM3AndSMS4_CBC 964
+#define OBJ_pbe_WithSM3AndSMS4_CBC 1L, 2L, 840L, 113549L, 1L, 12L, 1L, 100L
+
+#define SN_secg_scheme "secg-scheme"
+#define NID_secg_scheme 965
+#define OBJ_secg_scheme 1L, 3L, 132L, 1L
+
+#define SN_ISO_CN "ISO-CN"
+#define LN_ISO_CN "ISO CN Member Body"
+#define NID_ISO_CN 966
+#define OBJ_ISO_CN 1L, 2L, 156L
+
+#define SN_oscca "oscca"
+#define NID_oscca 967
+#define OBJ_oscca 1L, 2L, 156L, 10197L
+
+#define SN_sm_scheme "sm-scheme"
+#define NID_sm_scheme 968
+#define OBJ_sm_scheme 1L, 2L, 156L, 10197L, 1L
+
+#define SN_ssf33_ecb "SSF33-ECB"
+#define LN_ssf33_ecb "ssf33-ecb"
+#define NID_ssf33_ecb 969
+#define OBJ_ssf33_ecb 1L, 2L, 156L, 10197L, 1L, 103L, 1L
+
+#define SN_ssf33_cbc "SSF33-CBC"
+#define LN_ssf33_cbc "ssf33-cbc"
+#define NID_ssf33_cbc 970
+#define OBJ_ssf33_cbc 1L, 2L, 156L, 10197L, 1L, 103L, 2L
+
+#define SN_ssf33_ofb128 "SSF33-OFB"
+#define LN_ssf33_ofb128 "ssf33-ofb"
+#define NID_ssf33_ofb128 971
+#define OBJ_ssf33_ofb128 1L, 2L, 156L, 10197L, 1L, 103L, 3L
+
+#define SN_ssf33_cfb128 "SSF33-CFB"
+#define LN_ssf33_cfb128 "ssf33-cfb"
+#define NID_ssf33_cfb128 972
+#define OBJ_ssf33_cfb128 1L, 2L, 156L, 10197L, 1L, 103L, 4L
+
+#define SN_ssf33_cfb1 "SSF33-CFB1"
+#define LN_ssf33_cfb1 "ssf33-cfb1"
+#define NID_ssf33_cfb1 973
+#define OBJ_ssf33_cfb1 1L, 2L, 156L, 10197L, 1L, 103L, 5L
+
+#define SN_ssf33_cfb8 "SSF33-CFB8"
+#define LN_ssf33_cfb8 "ssf33-cfb8"
+#define NID_ssf33_cfb8 974
+#define OBJ_ssf33_cfb8 1L, 2L, 156L, 10197L, 1L, 103L, 6L
+
+#define SN_ssf33_cbc_mac "SSF33-CBC-MAC"
+#define LN_ssf33_cbc_mac "ssf33-cbc-mac"
+#define NID_ssf33_cbc_mac 975
+#define OBJ_ssf33_cbc_mac 1L, 2L, 156L, 10197L, 1L, 103L, 7L
+
+#define SN_sm1_ecb "SM1-ECB"
+#define LN_sm1_ecb "sm1-ecb"
+#define NID_sm1_ecb 976
+#define OBJ_sm1_ecb 1L, 2L, 156L, 10197L, 1L, 102L, 1L
+
+#define SN_sm1_cbc "SM1-CBC"
+#define LN_sm1_cbc "sm1-cbc"
+#define NID_sm1_cbc 977
+#define OBJ_sm1_cbc 1L, 2L, 156L, 10197L, 1L, 102L, 2L
+
+#define SN_sm1_ofb128 "SM1-OFB"
+#define LN_sm1_ofb128 "sm1-ofb"
+#define NID_sm1_ofb128 978
+#define OBJ_sm1_ofb128 1L, 2L, 156L, 10197L, 1L, 102L, 3L
+
+#define SN_sm1_cfb128 "SM1-CFB"
+#define LN_sm1_cfb128 "sm1-cfb"
+#define NID_sm1_cfb128 979
+#define OBJ_sm1_cfb128 1L, 2L, 156L, 10197L, 1L, 102L, 4L
+
+#define SN_sm1_cfb1 "SM1-CFB1"
+#define LN_sm1_cfb1 "sm1-cfb1"
+#define NID_sm1_cfb1 980
+#define OBJ_sm1_cfb1 1L, 2L, 156L, 10197L, 1L, 102L, 5L
+
+#define SN_sm1_cfb8 "SM1-CFB8"
+#define LN_sm1_cfb8 "sm1-cfb8"
+#define NID_sm1_cfb8 981
+#define OBJ_sm1_cfb8 1L, 2L, 156L, 10197L, 1L, 102L, 6L
+
+#define SN_sm2p256v1 "sm2p256v1"
+#define NID_sm2p256v1 982
+#define OBJ_sm2p256v1 1L, 2L, 156L, 10197L, 1L, 301L
+
+#define SN_sm2sign "sm2sign"
+#define NID_sm2sign 983
+#define OBJ_sm2sign 1L, 2L, 156L, 10197L, 1L, 301L, 1L
+
+#define SN_sm2exchange "sm2exchange"
+#define NID_sm2exchange 984
+#define OBJ_sm2exchange 1L, 2L, 156L, 10197L, 1L, 301L, 2L
+
+#define SN_sm2encrypt "sm2encrypt"
+#define NID_sm2encrypt 985
+#define OBJ_sm2encrypt 1L, 2L, 156L, 10197L, 1L, 301L, 3L
+
+#define SN_sm2sign_with_sm3 "SM2Sign-with-SM3"
+#define LN_sm2sign_with_sm3 "sm2sign-with-sm3"
+#define NID_sm2sign_with_sm3 986
+#define OBJ_sm2sign_with_sm3 1L, 2L, 156L, 10197L, 1L, 501L
+
+#define SN_sm2sign_with_sha1 "SM2Sign-with-SHA1"
+#define LN_sm2sign_with_sha1 "sm2sign-with-sha1"
+#define NID_sm2sign_with_sha1 987
+#define OBJ_sm2sign_with_sha1 1L, 2L, 156L, 10197L, 1L, 502L
+
+#define SN_sm2sign_with_sha256 "SM2Sign-with-SHA256"
+#define LN_sm2sign_with_sha256 "sm2sign-with-sha256"
+#define NID_sm2sign_with_sha256 988
+#define OBJ_sm2sign_with_sha256 1L, 2L, 156L, 10197L, 1L, 503L
+
+#define SN_sm2sign_with_sha512 "SM2Sign-with-SHA511"
+#define LN_sm2sign_with_sha512 "sm2sign-with-sha512"
+#define NID_sm2sign_with_sha512 989
+#define OBJ_sm2sign_with_sha512 1L, 2L, 156L, 10197L, 1L, 504L
+
+#define SN_sm2sign_with_sha224 "SM2Sign-with-SHA224"
+#define LN_sm2sign_with_sha224 "sm2sign-with-sha224"
+#define NID_sm2sign_with_sha224 990
+#define OBJ_sm2sign_with_sha224 1L, 2L, 156L, 10197L, 1L, 505L
+
+#define SN_sm2sign_with_sha384 "SM2Sign-with-SHA384"
+#define LN_sm2sign_with_sha384 "sm2sign-with-sha384"
+#define NID_sm2sign_with_sha384 991
+#define OBJ_sm2sign_with_sha384 1L, 2L, 156L, 10197L, 1L, 506L
+
+#define SN_sm2sign_with_rmd160 "SM2Sign-with-RMD160"
+#define LN_sm2sign_with_rmd160 "sm2sign-with-rmd160"
+#define NID_sm2sign_with_rmd160 992
+#define OBJ_sm2sign_with_rmd160 1L, 2L, 156L, 10197L, 1L, 507L
+
+#define SN_sm2sign_with_whirlpool "SM2Sign-with-Whirlpool"
+#define LN_sm2sign_with_whirlpool "sm2sign-with-whirlpool"
+#define NID_sm2sign_with_whirlpool 993
+#define OBJ_sm2sign_with_whirlpool 1L, 2L, 156L, 10197L, 1L, 520L
+
+#define SN_sm2sign_with_blake2b512 "SM2Sign-with-Blake2b512"
+#define LN_sm2sign_with_blake2b512 "sm2sign-with-blake2b512"
+#define NID_sm2sign_with_blake2b512 994
+#define OBJ_sm2sign_with_blake2b512 1L, 2L, 156L, 10197L, 1L, 521L
+
+#define SN_sm2sign_with_blake2s256 "SM2Sign-with-Blake2s256"
+#define LN_sm2sign_with_blake2s256 "sm2sign-with-blake2s256"
+#define NID_sm2sign_with_blake2s256 995
+#define OBJ_sm2sign_with_blake2s256 1L, 2L, 156L, 10197L, 1L, 522L
+
+#define SN_sm2encrypt_recommendedParameters "sm2encrypt-recommendedParameters"
+#define NID_sm2encrypt_recommendedParameters 996
+#define OBJ_sm2encrypt_recommendedParameters \
+  1L, 2L, 156L, 10197L, 1L, 301L, 3L, 1L
+
+#define SN_sm2encrypt_specifiedParameters "sm2encrypt-specifiedParameters"
+#define NID_sm2encrypt_specifiedParameters 997
+#define OBJ_sm2encrypt_specifiedParameters \
+  1L, 2L, 156L, 10197L, 1L, 301L, 3L, 2L
+
+#define SN_sm2encrypt_with_sm3 "sm2encrypt-with-sm3"
+#define NID_sm2encrypt_with_sm3 998
+#define OBJ_sm2encrypt_with_sm3 1L, 2L, 156L, 10197L, 1L, 301L, 3L, 2L, 1L
+
+#define SN_sm2encrypt_with_sha1 "sm2encrypt-with-sha1"
+#define NID_sm2encrypt_with_sha1 999
+#define OBJ_sm2encrypt_with_sha1 1L, 2L, 156L, 10197L, 1L, 301L, 3L, 2L, 2L
+
+#define SN_sm2encrypt_with_sha224 "sm2encrypt-with-sha224"
+#define NID_sm2encrypt_with_sha224 1000
+#define OBJ_sm2encrypt_with_sha224 1L, 2L, 156L, 10197L, 1L, 301L, 3L, 2L, 3L
+
+#define SN_sm2encrypt_with_sha256 "sm2encrypt-with-sha256"
+#define NID_sm2encrypt_with_sha256 1001
+#define OBJ_sm2encrypt_with_sha256 1L, 2L, 156L, 10197L, 1L, 301L, 3L, 2L, 4L
+
+#define SN_sm2encrypt_with_sha384 "sm2encrypt-with-sha384"
+#define NID_sm2encrypt_with_sha384 1002
+#define OBJ_sm2encrypt_with_sha384 1L, 2L, 156L, 10197L, 1L, 301L, 3L, 2L, 5L
+
+#define SN_sm2encrypt_with_sha512 "sm2encrypt-with-sha512"
+#define NID_sm2encrypt_with_sha512 1003
+#define OBJ_sm2encrypt_with_sha512 1L, 2L, 156L, 10197L, 1L, 301L, 3L, 2L, 6L
+
+#define SN_sm2encrypt_with_rmd160 "sm2encrypt-with-rmd160"
+#define NID_sm2encrypt_with_rmd160 1004
+#define OBJ_sm2encrypt_with_rmd160 1L, 2L, 156L, 10197L, 1L, 301L, 3L, 2L, 7L
+
+#define SN_sm2encrypt_with_whirlpool "sm2encrypt-with-whirlpool"
+#define NID_sm2encrypt_with_whirlpool 1005
+#define OBJ_sm2encrypt_with_whirlpool 1L, 2L, 156L, 10197L, 1L, 301L, 3L, 2L, 8L
+
+#define SN_sm2encrypt_with_blake2b512 "sm2encrypt-with-blake2b512"
+#define NID_sm2encrypt_with_blake2b512 1006
+#define OBJ_sm2encrypt_with_blake2b512 \
+  1L, 2L, 156L, 10197L, 1L, 301L, 3L, 2L, 9L
+
+#define SN_sm2encrypt_with_blake2s256 "sm2encrypt-with-blake2s256"
+#define NID_sm2encrypt_with_blake2s256 1007
+#define OBJ_sm2encrypt_with_blake2s256 \
+  1L, 2L, 156L, 10197L, 1L, 301L, 3L, 2L, 10L
+
+#define SN_sm2encrypt_with_md5 "sm2encrypt-with-md5"
+#define NID_sm2encrypt_with_md5 1008
+#define OBJ_sm2encrypt_with_md5 1L, 2L, 156L, 10197L, 1L, 301L, 3L, 2L, 11L
+
+#define SN_sm3 "SM3"
+#define LN_sm3 "sm3"
+#define NID_sm3 1009
+#define OBJ_sm3 1L, 2L, 156L, 10197L, 1L, 401L
+
+#define SN_hmac_sm3 "HMAC-SM3"
+#define LN_hmac_sm3 "hmac-sm3"
+#define NID_hmac_sm3 1010
+#define OBJ_hmac_sm3 1L, 2L, 156L, 10197L, 1L, 401L, 2L
+
+#define SN_sms4_ecb "SMS4-ECB"
+#define LN_sms4_ecb "sms4-ecb"
+#define NID_sms4_ecb 1011
+#define OBJ_sms4_ecb 1L, 2L, 156L, 10197L, 1L, 104L, 1L
+
+#define SN_sms4_cbc "SMS4-CBC"
+#define LN_sms4_cbc "sms4-cbc"
+#define NID_sms4_cbc 1012
+#define OBJ_sms4_cbc 1L, 2L, 156L, 10197L, 1L, 104L, 2L
+
+#define SN_sms4_ofb128 "SMS4-OFB"
+#define LN_sms4_ofb128 "sms4-ofb"
+#define NID_sms4_ofb128 1013
+#define OBJ_sms4_ofb128 1L, 2L, 156L, 10197L, 1L, 104L, 3L
+
+#define SN_sms4_cfb128 "SMS4-CFB"
+#define LN_sms4_cfb128 "sms4-cfb"
+#define NID_sms4_cfb128 1014
+#define OBJ_sms4_cfb128 1L, 2L, 156L, 10197L, 1L, 104L, 4L
+
+#define SN_sms4_cfb1 "SMS4-CFB1"
+#define LN_sms4_cfb1 "sms4-cfb1"
+#define NID_sms4_cfb1 1015
+#define OBJ_sms4_cfb1 1L, 2L, 156L, 10197L, 1L, 104L, 5L
+
+#define SN_sms4_cfb8 "SMS4-CFB8"
+#define LN_sms4_cfb8 "sms4-cfb8"
+#define NID_sms4_cfb8 1016
+#define OBJ_sms4_cfb8 1L, 2L, 156L, 10197L, 1L, 104L, 6L
+
+#define SN_sms4_ctr "SMS4-CTR"
+#define LN_sms4_ctr "sms4-ctr"
+#define NID_sms4_ctr 1017
+#define OBJ_sms4_ctr 1L, 2L, 156L, 10197L, 1L, 104L, 7L
+
+#define SN_sms4_gcm "SMS4-GCM"
+#define LN_sms4_gcm "sms4-gcm"
+#define NID_sms4_gcm 1018
+#define OBJ_sms4_gcm 1L, 2L, 156L, 10197L, 1L, 104L, 8L
+
+#define SN_sms4_ccm "SMS4-CCM"
+#define LN_sms4_ccm "sms4-ccm"
+#define NID_sms4_ccm 1019
+#define OBJ_sms4_ccm 1L, 2L, 156L, 10197L, 1L, 104L, 9L
+
+#define SN_sms4_xts "SMS4-XTS"
+#define LN_sms4_xts "sms4-xts"
+#define NID_sms4_xts 1020
+#define OBJ_sms4_xts 1L, 2L, 156L, 10197L, 1L, 104L, 10L
+
+#define SN_sms4_wrap "SMS4-WRAP"
+#define LN_sms4_wrap "sms4-wrap"
+#define NID_sms4_wrap 1021
+#define OBJ_sms4_wrap 1L, 2L, 156L, 10197L, 1L, 104L, 11L
+
+#define SN_sms4_wrap_pad "SMS4-WRAP-PAD"
+#define LN_sms4_wrap_pad "sms4-wrap-pad"
+#define NID_sms4_wrap_pad 1022
+#define OBJ_sms4_wrap_pad 1L, 2L, 156L, 10197L, 1L, 104L, 12L
+
+#define SN_sms4_ocb "SMS4-OCB"
+#define LN_sms4_ocb "sms4-ocb"
+#define NID_sms4_ocb 1023
+#define OBJ_sms4_ocb 1L, 2L, 156L, 10197L, 1L, 104L, 100L
+
+#define SN_sm5 "SM5"
+#define LN_sm5 "sm5"
+#define NID_sm5 1024
+#define OBJ_sm5 1L, 2L, 156L, 10197L, 1L, 201L
+
+#define SN_sm6_ecb "SM6-ECB"
+#define LN_sm6_ecb "sm6-ecb"
+#define NID_sm6_ecb 1025
+#define OBJ_sm6_ecb 1L, 2L, 156L, 10197L, 1L, 101L, 1L
+
+#define SN_sm6_cbc "SM6-CBC"
+#define LN_sm6_cbc "sm6-cbc"
+#define NID_sm6_cbc 1026
+#define OBJ_sm6_cbc 1L, 2L, 156L, 10197L, 1L, 101L, 2L
+
+#define SN_sm6_ofb128 "SM6-OFB"
+#define LN_sm6_ofb128 "sm6-ofb"
+#define NID_sm6_ofb128 1027
+#define OBJ_sm6_ofb128 1L, 2L, 156L, 10197L, 1L, 101L, 3L
+
+#define SN_sm6_cfb128 "SM6-CFB"
+#define LN_sm6_cfb128 "sm6-cfb"
+#define NID_sm6_cfb128 1028
+#define OBJ_sm6_cfb128 1L, 2L, 156L, 10197L, 1L, 101L, 4L
+
+#define SN_id_sm9PublicKey "id-sm9PublicKey"
+#define NID_id_sm9PublicKey 1029
+#define OBJ_id_sm9PublicKey 1L, 2L, 156L, 10197L, 1L, 302L
+
+#define SN_sm9sign "sm9sign"
+#define NID_sm9sign 1030
+#define OBJ_sm9sign 1L, 2L, 156L, 10197L, 1L, 302L, 1L
+
+#define SN_sm9keyagreement "sm9keyagreement"
+#define NID_sm9keyagreement 1031
+#define OBJ_sm9keyagreement 1L, 2L, 156L, 10197L, 1L, 302L, 2L
+
+#define SN_sm9encrypt "sm9encrypt"
+#define NID_sm9encrypt 1032
+#define OBJ_sm9encrypt 1L, 2L, 156L, 10197L, 1L, 302L, 3L
+
+#define SN_sm9hash1 "sm9hash1"
+#define NID_sm9hash1 1033
+#define OBJ_sm9hash1 1L, 2L, 156L, 10197L, 1L, 302L, 4L
+
+#define SN_sm9hash2 "sm9hash2"
+#define NID_sm9hash2 1034
+#define OBJ_sm9hash2 1L, 2L, 156L, 10197L, 1L, 303L, 7L
+
+#define SN_sm9kdf "sm9kdf"
+#define NID_sm9kdf 1035
+#define OBJ_sm9kdf 1L, 2L, 156L, 10197L, 1L, 302L, 5L
+
+#define SN_id_sm9MasterSecret "id-sm9MasterSecret"
+#define NID_id_sm9MasterSecret 1036
+#define OBJ_id_sm9MasterSecret 1L, 2L, 156L, 10197L, 1L, 302L, 6L
+
+#define SN_sm9bn256v1 "sm9bn256v1"
+#define NID_sm9bn256v1 1037
+#define OBJ_sm9bn256v1 1L, 2L, 156L, 10197L, 1L, 302L, 6L, 1L
+
+#define SN_sm9sign_with_sm3 "sm9sign-with-sm3"
+#define NID_sm9sign_with_sm3 1038
+#define OBJ_sm9sign_with_sm3 1L, 2L, 156L, 10197L, 1L, 302L, 1L, 1L
+
+#define SN_sm9sign_with_sha256 "sm9sign-with-sha256"
+#define NID_sm9sign_with_sha256 1039
+#define OBJ_sm9sign_with_sha256 1L, 2L, 156L, 10197L, 1L, 302L, 1L, 2L
+
+#define SN_sm9encrypt_with_sm3_xor "sm9encrypt-with-sm3-xor"
+#define NID_sm9encrypt_with_sm3_xor 1040
+#define OBJ_sm9encrypt_with_sm3_xor 1L, 2L, 156L, 10197L, 1L, 302L, 3L, 1L
+
+#define SN_sm9encrypt_with_sm3_sms4_cbc "sm9encrypt-with-sm3-sms4-cbc"
+#define NID_sm9encrypt_with_sm3_sms4_cbc 1041
+#define OBJ_sm9encrypt_with_sm3_sms4_cbc 1L, 2L, 156L, 10197L, 1L, 302L, 3L, 2L
+
+#define SN_sm9encrypt_with_sm3_sms4_ctr "sm9encrypt-with-sm3-sms4-ctr"
+#define NID_sm9encrypt_with_sm3_sms4_ctr 1042
+#define OBJ_sm9encrypt_with_sm3_sms4_ctr 1L, 2L, 156L, 10197L, 1L, 302L, 3L, 3L
+
+#define SN_sm9hash1_with_sm3 "sm9hash1-with-sm3"
+#define NID_sm9hash1_with_sm3 1043
+#define OBJ_sm9hash1_with_sm3 1L, 2L, 156L, 10197L, 1L, 302L, 4L, 1L
+
+#define SN_sm9hash1_with_sha256 "sm9hash1-with-sha256"
+#define NID_sm9hash1_with_sha256 1044
+#define OBJ_sm9hash1_with_sha256 1L, 2L, 156L, 10197L, 1L, 302L, 4L, 2L
+
+#define SN_sm9hash2_with_sm3 "sm9hash2-with-sm3"
+#define NID_sm9hash2_with_sm3 1045
+#define OBJ_sm9hash2_with_sm3 1L, 2L, 156L, 10197L, 1L, 303L, 7L, 1L
+
+#define SN_sm9hash2_with_sha256 "sm9hash2-with-sha256"
+#define NID_sm9hash2_with_sha256 1046
+#define OBJ_sm9hash2_with_sha256 1L, 2L, 156L, 10197L, 1L, 303L, 7L, 2L
+
+#define SN_sm9kdf_with_sm3 "sm9kdf-with-sm3"
+#define NID_sm9kdf_with_sm3 1047
+#define OBJ_sm9kdf_with_sm3 1L, 2L, 156L, 10197L, 1L, 302L, 5L, 1L
+
+#define SN_sm9kdf_with_sha256 "sm9kdf-with-sha256"
+#define NID_sm9kdf_with_sha256 1048
+#define OBJ_sm9kdf_with_sha256 1L, 2L, 156L, 10197L, 1L, 302L, 5L, 2L
+
+#define SN_zuc "ZUC"
+#define LN_zuc "zuc"
+#define NID_zuc 1049
+#define OBJ_zuc 1L, 2L, 156L, 10197L, 1L, 800L
+
+#define SN_zuc_128eea3 "zuc-128eea3"
+#define NID_zuc_128eea3 1050
+#define OBJ_zuc_128eea3 1L, 2L, 156L, 10197L, 1L, 800L, 1L
+
+#define SN_zuc_128eia3 "zuc-128eia3"
+#define NID_zuc_128eia3 1051
+#define OBJ_zuc_128eia3 1L, 2L, 156L, 10197L, 1L, 800L, 2L
+
+#define SN_zuc_mac "ZUC-MAC"
+#define LN_zuc_mac "zuc-mac"
+#define NID_zuc_mac 1052
+#define OBJ_zuc_mac 1L, 2L, 156L, 10197L, 1L, 800L, 3L
+
+#define SN_zuc256 "ZUC256"
+#define LN_zuc256 "zuc256"
+#define NID_zuc256 1053
+#define OBJ_zuc256 1L, 2L, 156L, 10197L, 1L, 800L, 4L
+
+#define SN_zuc256_mac "ZUC256-MAC"
+#define LN_zuc256_mac "zuc256-mac"
+#define NID_zuc256_mac 1054
+#define OBJ_zuc256_mac 1L, 2L, 156L, 10197L, 1L, 800L, 5L
+
+#define SN_zuc256_mac32 "ZUC256-MAC32"
+#define LN_zuc256_mac32 "zuc256-mac32"
+#define NID_zuc256_mac32 1055
+#define OBJ_zuc256_mac32 1L, 2L, 156L, 10197L, 1L, 800L, 5L, 1L
+
+#define SN_zuc256_mac64 "ZUC256-MAC64"
+#define LN_zuc256_mac64 "zuc256-mac64"
+#define NID_zuc256_mac64 1056
+#define OBJ_zuc256_mac64 1L, 2L, 156L, 10197L, 1L, 800L, 5L, 2L
+
+#define SN_zuc256_mac128 "ZUC256-MAC128"
+#define LN_zuc256_mac128 "zuc256-mac128"
+#define NID_zuc256_mac128 1057
+#define OBJ_zuc256_mac128 1L, 2L, 156L, 10197L, 1L, 800L, 5L, 3L
+
+#define SN_bwips "bwips"
+#define NID_bwips 1058
+#define OBJ_bwips 1L, 2L, 156L, 11235L
+
+#define SN_wapi_crypto "wapi-crypto"
+#define NID_wapi_crypto 1059
+#define OBJ_wapi_crypto 1L, 2L, 156L, 11235L, 1L
+
+#define SN_wapi_ec "wapi-ec"
+#define NID_wapi_ec 1060
+#define OBJ_wapi_ec 1L, 2L, 156L, 11235L, 1L, 1L
+
+#define SN_wapi_ecdsa192_sha256 "wapi-ecdsa192-sha256"
+#define NID_wapi_ecdsa192_sha256 1061
+#define OBJ_wapi_ecdsa192_sha256 1L, 2L, 156L, 11235L, 1L, 1L, 1L
+
+#define SN_wapip192v1 "wapip192v1"
+#define NID_wapip192v1 1062
+#define OBJ_wapip192v1 1L, 2L, 156L, 11235L, 1L, 1L, 2L, 1L
+
+#define SN_kx_sm2 "KxSM2"
+#define LN_kx_sm2 "kx-sm2"
+#define NID_kx_sm2 1063
+
+#define SN_kx_sm2dhe "KxSM2DHE"
+#define LN_kx_sm2dhe "kx-sm2dhe"
+#define NID_kx_sm2dhe 1064
+
+#define SN_kx_sm2_psk "KxSM2-PSK"
+#define LN_kx_sm2_psk "kx-sm2-psk"
+#define NID_kx_sm2_psk 1065
+
+#define SN_kx_sm9 "KxSM9"
+#define LN_kx_sm9 "kx-sm9"
+#define NID_kx_sm9 1066
+
+#define SN_kx_sm9dhe "KxSM9DHE"
+#define LN_kx_sm9dhe "kx-sm9dhe"
+#define NID_kx_sm9dhe 1067
+
+#define SN_auth_sm2 "AuthSM2"
+#define LN_auth_sm2 "auth-sm2"
+#define NID_auth_sm2 1068
+
+#define SN_auth_sm9 "AuthSM9"
+#define LN_auth_sm9 "auth-sm9"
+#define NID_auth_sm9 1069
+
+#define SN_GmSSL "gmssl"
+#define LN_GmSSL "GmSSL"
+#define NID_GmSSL 1070
+#define OBJ_GmSSL 1L, 3L, 6L, 1L, 4L, 1L, 49549L
+
+#define SN_cpk "CPK"
+#define LN_cpk "cpk"
+#define NID_cpk 1071
+#define OBJ_cpk 1L, 3L, 6L, 1L, 4L, 1L, 49549L, 1L
+
+#define SN_cpk_map "cpk-map"
+#define NID_cpk_map 1072
+#define OBJ_cpk_map 1L, 3L, 6L, 1L, 4L, 1L, 49549L, 1L, 1L
+
+#define SN_cpk_map_sha1 "cpk-map-sha1"
+#define NID_cpk_map_sha1 1073
+#define OBJ_cpk_map_sha1 1L, 3L, 6L, 1L, 4L, 1L, 49549L, 1L, 1L, 1L
+
+#define SN_cpk_map_sha256 "cpk-map-sha256"
+#define NID_cpk_map_sha256 1074
+#define OBJ_cpk_map_sha256 1L, 3L, 6L, 1L, 4L, 1L, 49549L, 1L, 1L, 2L
+
+#define SN_cpk_map_sm3 "cpk-map-sm3"
+#define NID_cpk_map_sm3 1075
+#define OBJ_cpk_map_sm3 1L, 3L, 6L, 1L, 4L, 1L, 49549L, 1L, 1L, 3L
+
+#define SN_cpk_map_sha384 "cpk-map-sha384"
+#define NID_cpk_map_sha384 1076
+#define OBJ_cpk_map_sha384 1L, 3L, 6L, 1L, 4L, 1L, 49549L, 1L, 1L, 4L
+
+#define SN_cpk_map_sha512 "cpk-map-sha512"
+#define NID_cpk_map_sha512 1077
+#define OBJ_cpk_map_sha512 1L, 3L, 6L, 1L, 4L, 1L, 49549L, 1L, 1L, 5L
+
+#define SN_paillier "paillier"
+#define NID_paillier 1078
+#define OBJ_paillier 1L, 3L, 6L, 1L, 4L, 1L, 49549L, 21L
 
 #if defined(__cplusplus)
 } /* extern C */
