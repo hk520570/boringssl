@@ -70,9 +70,24 @@
 #include "../internal.h"
 
 
-static char *i2s_ASN1_IA5STRING(const X509V3_EXT_METHOD *method, void *ext)
+static char *i2s_ASN1_IA5STRING(X509V3_EXT_METHOD *method,
+                                ASN1_IA5STRING *ia5);
+static ASN1_IA5STRING *s2i_ASN1_IA5STRING(X509V3_EXT_METHOD *method,
+                                          X509V3_CTX *ctx, char *str);
+const X509V3_EXT_METHOD v3_ns_ia5_list[] = {
+    EXT_IA5STRING(NID_netscape_base_url),
+    EXT_IA5STRING(NID_netscape_revocation_url),
+    EXT_IA5STRING(NID_netscape_ca_revocation_url),
+    EXT_IA5STRING(NID_netscape_renewal_url),
+    EXT_IA5STRING(NID_netscape_ca_policy_url),
+    EXT_IA5STRING(NID_netscape_ssl_server_name),
+    EXT_IA5STRING(NID_netscape_comment),
+    EXT_END
+};
+
+static char *i2s_ASN1_IA5STRING(X509V3_EXT_METHOD *method,
+                                ASN1_IA5STRING *ia5)
 {
-    const ASN1_IA5STRING *ia5 = ext;
     char *tmp;
     if (!ia5 || !ia5->length)
         return NULL;
@@ -85,8 +100,8 @@ static char *i2s_ASN1_IA5STRING(const X509V3_EXT_METHOD *method, void *ext)
     return tmp;
 }
 
-static void *s2i_ASN1_IA5STRING(const X509V3_EXT_METHOD *method,
-                                X509V3_CTX *ctx, const char *str)
+static ASN1_IA5STRING *s2i_ASN1_IA5STRING(X509V3_EXT_METHOD *method,
+                                          X509V3_CTX *ctx, char *str)
 {
     ASN1_IA5STRING *ia5;
     if (!str) {
@@ -104,23 +119,3 @@ static void *s2i_ASN1_IA5STRING(const X509V3_EXT_METHOD *method,
     OPENSSL_PUT_ERROR(X509V3, ERR_R_MALLOC_FAILURE);
     return NULL;
 }
-
-#define EXT_IA5STRING(nid)                                                 \
-  {                                                                        \
-    nid, 0, ASN1_ITEM_ref(ASN1_IA5STRING), 0, 0, 0, 0, i2s_ASN1_IA5STRING, \
-        s2i_ASN1_IA5STRING, 0, 0, 0, 0, NULL                               \
-  }
-
-#define EXT_END \
-  { -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
-
-const X509V3_EXT_METHOD v3_ns_ia5_list[] = {
-    EXT_IA5STRING(NID_netscape_base_url),
-    EXT_IA5STRING(NID_netscape_revocation_url),
-    EXT_IA5STRING(NID_netscape_ca_revocation_url),
-    EXT_IA5STRING(NID_netscape_renewal_url),
-    EXT_IA5STRING(NID_netscape_ca_policy_url),
-    EXT_IA5STRING(NID_netscape_ssl_server_name),
-    EXT_IA5STRING(NID_netscape_comment),
-    EXT_END
-};

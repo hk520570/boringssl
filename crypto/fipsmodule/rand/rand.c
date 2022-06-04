@@ -23,6 +23,7 @@
 #endif
 
 #include <openssl/chacha.h>
+#include <openssl/cpu.h>
 #include <openssl/mem.h>
 #include <openssl/type_check.h>
 
@@ -170,11 +171,11 @@ void CRYPTO_get_seed_entropy(uint8_t *out_entropy, size_t out_entropy_len,
     CRYPTO_sysrand_for_seed(out_entropy, out_entropy_len);
   }
 
-  if (boringssl_fips_break_test("CRNG")) {
-    // This breaks the "continuous random number generator test" defined in FIPS
-    // 140-2, section 4.9.2, and implemented in |rand_get_seed|.
-    OPENSSL_memset(out_entropy, 0, out_entropy_len);
-  }
+#if defined(BORINGSSL_FIPS_BREAK_CRNG)
+  // This breaks the "continuous random number generator test" defined in FIPS
+  // 140-2, section 4.9.2, and implemented in |rand_get_seed|.
+  OPENSSL_memset(out_entropy, 0, out_entropy_len);
+#endif
 }
 
 // In passive entropy mode, entropy is supplied from outside of the module via

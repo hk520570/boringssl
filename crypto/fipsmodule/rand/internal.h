@@ -16,6 +16,7 @@
 #define OPENSSL_HEADER_CRYPTO_RAND_INTERNAL_H
 
 #include <openssl/aes.h>
+#include <openssl/cpu.h>
 
 #include "../../internal.h"
 #include "../modes/internal.h"
@@ -143,14 +144,15 @@ OPENSSL_EXPORT void CTR_DRBG_clear(CTR_DRBG_STATE *drbg);
 #if defined(OPENSSL_X86_64) && !defined(OPENSSL_NO_ASM)
 
 OPENSSL_INLINE int have_rdrand(void) {
-  return CRYPTO_is_RDRAND_capable();
+  return (OPENSSL_ia32cap_get()[1] & (1u << 30)) != 0;
 }
 
 // have_fast_rdrand returns true if RDRAND is supported and it's reasonably
 // fast. Concretely the latter is defined by whether the chip is Intel (fast) or
 // not (assumed slow).
 OPENSSL_INLINE int have_fast_rdrand(void) {
-  return CRYPTO_is_RDRAND_capable() && CRYPTO_is_intel_cpu();
+  const uint32_t *const ia32cap = OPENSSL_ia32cap_get();
+  return (ia32cap[1] & (1u << 30)) && (ia32cap[0] & (1u << 30));
 }
 
 // CRYPTO_rdrand writes eight bytes of random data from the hardware RNG to

@@ -5146,7 +5146,7 @@ TEST(SSLTest, Handoff) {
 
   SSL_CTX_set_session_cache_mode(client_ctx.get(), SSL_SESS_CACHE_CLIENT);
   SSL_CTX_sess_set_new_cb(client_ctx.get(), SaveLastSession);
-  SSL_CTX_set_handoff_mode(server_ctx.get(), true);
+  SSL_CTX_set_handoff_mode(server_ctx.get(), 1);
   uint8_t keys[48];
   SSL_CTX_get_tlsext_ticket_keys(server_ctx.get(), &keys, sizeof(keys));
   SSL_CTX_set_tlsext_ticket_keys(handshaker_ctx.get(), &keys, sizeof(keys));
@@ -5251,7 +5251,7 @@ TEST(SSLTest, HandoffDeclined) {
   ASSERT_TRUE(client_ctx);
   ASSERT_TRUE(server_ctx);
 
-  SSL_CTX_set_handoff_mode(server_ctx.get(), true);
+  SSL_CTX_set_handoff_mode(server_ctx.get(), 1);
   ASSERT_TRUE(SSL_CTX_set_max_proto_version(server_ctx.get(), TLS1_2_VERSION));
 
   bssl::UniquePtr<SSL> client, server;
@@ -8111,52 +8111,6 @@ RVHWbCvFvNZAoWiIJ2z34RLGInyZvCZ8xLAvsuaWULDDaoeDl1M0t4Hm
               ConnectClientAndServer(&client, &server, client_ctx.get(),
                                      server_ctx.get(), config));
   }
-}
-
-TEST(SSLTest, NumTickets) {
-  bssl::UniquePtr<SSL_CTX> server_ctx(SSL_CTX_new(TLS_method()));
-  ASSERT_TRUE(server_ctx);
-  bssl::UniquePtr<SSL_CTX> client_ctx(SSL_CTX_new(TLS_method()));
-  ASSERT_TRUE(client_ctx);
-  bssl::UniquePtr<X509> cert = GetTestCertificate();
-  ASSERT_TRUE(cert);
-  bssl::UniquePtr<EVP_PKEY> key = GetTestKey();
-  ASSERT_TRUE(key);
-  ASSERT_TRUE(SSL_CTX_use_certificate(server_ctx.get(), cert.get()));
-  ASSERT_TRUE(SSL_CTX_use_PrivateKey(server_ctx.get(), key.get()));
-  SSL_CTX_set_session_cache_mode(server_ctx.get(), SSL_SESS_CACHE_BOTH);
-
-  SSL_CTX_set_session_cache_mode(client_ctx.get(), SSL_SESS_CACHE_BOTH);
-  static size_t ticket_count;
-  SSL_CTX_sess_set_new_cb(client_ctx.get(), [](SSL *, SSL_SESSION *) -> int {
-    ticket_count++;
-    return 0;
-  });
-
-  auto count_tickets = [&]() -> size_t {
-    ticket_count = 0;
-    bssl::UniquePtr<SSL> client, server;
-    if (!ConnectClientAndServer(&client, &server, client_ctx.get(),
-                                server_ctx.get()) ||
-        !FlushNewSessionTickets(client.get(), server.get())) {
-      ADD_FAILURE() << "Could not run handshake";
-      return 0;
-    }
-    return ticket_count;
-  };
-
-  // By default, we should send two tickets.
-  EXPECT_EQ(count_tickets(), 2u);
-
-  for (size_t num_tickets : {0, 1, 2, 3, 4, 5}) {
-    SCOPED_TRACE(num_tickets);
-    ASSERT_TRUE(SSL_CTX_set_num_tickets(server_ctx.get(), num_tickets));
-    EXPECT_EQ(count_tickets(), num_tickets);
-  }
-
-  // Configuring too many tickets causes us to stop at some point.
-  ASSERT_TRUE(SSL_CTX_set_num_tickets(server_ctx.get(), 100000));
-  EXPECT_EQ(count_tickets(), 16u);
 }
 
 }  // namespace

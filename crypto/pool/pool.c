@@ -19,8 +19,6 @@
 
 #include <openssl/bytestring.h>
 #include <openssl/mem.h>
-#include <openssl/rand.h>
-#include <openssl/siphash.h>
 #include <openssl/thread.h>
 
 #include "../internal.h"
@@ -28,13 +26,10 @@
 
 
 static uint32_t CRYPTO_BUFFER_hash(const CRYPTO_BUFFER *buf) {
-  return (uint32_t)SIPHASH_24(buf->pool->hash_key, buf->data, buf->len);
+  return OPENSSL_hash32(buf->data, buf->len);
 }
 
 static int CRYPTO_BUFFER_cmp(const CRYPTO_BUFFER *a, const CRYPTO_BUFFER *b) {
-  // Only |CRYPTO_BUFFER|s from the same pool have compatible hashes.
-  assert(a->pool != NULL);
-  assert(a->pool == b->pool);
   if (a->len != b->len) {
     return 1;
   }
@@ -55,7 +50,6 @@ CRYPTO_BUFFER_POOL* CRYPTO_BUFFER_POOL_new(void) {
   }
 
   CRYPTO_MUTEX_init(&pool->lock);
-  RAND_bytes((uint8_t *)&pool->hash_key, sizeof(pool->hash_key));
 
   return pool;
 }
@@ -90,7 +84,6 @@ static CRYPTO_BUFFER *crypto_buffer_new(const uint8_t *data, size_t len,
     CRYPTO_BUFFER tmp;
     tmp.data = (uint8_t *) data;
     tmp.len = len;
-    tmp.pool = pool;
 
     CRYPTO_MUTEX_lock_read(&pool->lock);
     CRYPTO_BUFFER *duplicate = lh_CRYPTO_BUFFER_retrieve(pool->bufs, &tmp);

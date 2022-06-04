@@ -1008,7 +1008,3 @@ TEST(AEADTest, WycheproofXChaCha20Poly1305) {
         RunWycheproofTestCase(t, EVP_aead_xchacha20_poly1305());
       });
 }
-
-TEST(AEADTest, FreeNull) {
-  EVP_AEAD_CTX_free(nullptr);
-}

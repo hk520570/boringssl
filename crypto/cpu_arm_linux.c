@@ -12,10 +12,9 @@
  * OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
  * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE. */
 
-#include "internal.h"
+#include <openssl/cpu.h>
 
-#if defined(OPENSSL_ARM) && defined(OPENSSL_LINUX) && \
-    !defined(OPENSSL_STATIC_ARMCAP)
+#if defined(OPENSSL_ARM) && !defined(OPENSSL_STATIC_ARMCAP)
 #include <errno.h>
 #include <fcntl.h>
 #include <sys/types.h>
@@ -227,4 +226,4 @@ int CRYPTO_has_broken_NEON(void) { return g_has_broken_neon; }
 
 int CRYPTO_needs_hwcap2_workaround(void) { return g_needs_hwcap2_workaround; }
 
-#endif  // OPENSSL_ARM && OPENSSL_LINUX && !OPENSSL_STATIC_ARMCAP
+#endif  // OPENSSL_ARM && !OPENSSL_STATIC_ARMCAP

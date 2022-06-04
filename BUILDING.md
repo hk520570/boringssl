@@ -30,11 +30,12 @@ most recent stable version of each tool.
     by CMake, it may be configured explicitly by setting
     `CMAKE_ASM_NASM_COMPILER`.
 
-  * C and C++ compilers with C++14 support are required. If using a C compiler
-    other than MSVC, C11 support is also requried. On Windows, MSVC from
-    Visual Studio 2017 or later with Platform SDK 8.1 or later are supported,
-    but newer versions are recommended. Recent versions of GCC (6.1+) and Clang
-    should work on non-Windows platforms, and maybe on Windows too.
+  * C and C++ compilers with C++11 support are required. On Windows, MSVC 14
+    (Visual Studio 2015) or later with Platform SDK 8.1 or later are supported,
+    but newer versions are recommended. We will drop support for Visual Studio
+    2015 in March 2022, five years after the release of Visual Studio 2017.
+    Recent versions of GCC (6.1+) and Clang should work on non-Windows
+    platforms, and maybe on Windows too.
 
   * The most recent stable version of [Go](https://golang.org/dl/) is required.
     Note Go is exempt from the five year support window. If not found by CMake,
@@ -169,12 +170,10 @@ applications to discover the capabilities of the processor. Instead, the
 capability information has to be provided by a combination of compile-time
 information and the operating system.
 
-BoringSSL determines capabilities at compile-time based on `__ARM_NEON`,
-`__ARM_FEATURE_AES`, and other preprocessor symbols defined in
-[Arm C Language Extensions (ACLE)](https://developer.arm.com/architectures/system-architectures/software-standards/acle).
+BoringSSL determines capabilities at compile-time based on `__ARM_NEON__`,
+`__ARM_FEATURE_CRYPTO`, and other preprocessor symbols reported by the compiler.
 These values are usually controlled by the `-march` flag. You can also define
-any of the following to enable the corresponding ARM feature, but using the ACLE
-symbols via `-march` is recommended.
+any of the following to enable the corresponding ARM feature.
 
   * `OPENSSL_STATIC_ARMCAP_NEON`
   * `OPENSSL_STATIC_ARMCAP_AES`
